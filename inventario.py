@@ -5,3 +5,4 @@ try:
     stock= int(input("Type product quantity: "))
 except:
     print("Invalid value! Try again")
+total_cost= price * stock
