@@ -14,7 +14,7 @@ while op!= 4:
     try:
         op= int(input("Product register\n 1) Add product\n 2) Show inventory \n 3) Calculate stadistics\n 4) Exit\n >> "))
         if op== 1:
-            add_product(products)
+            add_product(inventory)
         elif op== 2:
             pass
         elif op== 3:
