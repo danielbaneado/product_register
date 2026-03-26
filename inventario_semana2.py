@@ -8,7 +8,7 @@ def add_product(inventory):
         inventory.append({"Name": name, "Price": price, "Stock": stock})
     except:
         print("Invalid value! Try again")
-    return products
+    return inventory
         
 while op!= 4:
     try:
