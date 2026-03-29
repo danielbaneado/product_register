@@ -1,4 +1,4 @@
-import services_s3
+import services_s3 as services
 op= True
 inventory= []
 
@@ -14,7 +14,7 @@ while op!= 7:
     elif op== 2:
         services.see_inventory(inventory) 
     elif op== 3:
-        services.calculate_totals(inventory)
+        services.calculate_stadistics(inventory)
     elif op== 4:
         pname= input("Type product name to search\n >> ").lower()
         services.search_product(inventory, pname)
