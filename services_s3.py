@@ -18,7 +18,7 @@ def see_inventory(inventory):
         for qualities, details in product.items():
             print(qualities, "->", details) 
 
-def calculate_totals(inventory):
+def calculate_stadistics(inventory):
     """
     Same return as see_inventory.
     Calculates an overall by all products price and stock, also shows the number of added products.
@@ -29,12 +29,29 @@ def calculate_totals(inventory):
     inventory_total= []   
     overall= 0  
     product_quantity= 0  
-    for product in inventory:  
-        product_quantity+= 1  
+    for product in inventory:
+        product_quantity+= 1
         inventory_total.append(product["Price"] * product["Stock"]) 
     print("Overall", "\n", "-" * 30)
-    for total in inventory_total: 
+    for total in inventory_total:
         overall+= total
+        
+    print("Most expensive product")
+    expensive= sorted(inventory, key=lambda x: x["Price"], reverse=True)
+    for qualities, details in expensive[0].items():
+        if qualities== "Stock":
+            continue
+        print(qualities, "->", details) 
+            
+    print("-" * 30)
+    print("Product with more stock")
+    stock= sorted(inventory, key=lambda x: x["Stock"], reverse=True)
+    for qualities, details in stock[0].items():
+        if qualities== "Price":
+            continue
+        print(qualities, "->", details) 
+        
+    print("-" * 30)
     print("Inventory total ->", overall, "\n", "-" * 30, "\nProducts added ->", product_quantity)
     cart= (overall, product_quantity)
     return cart
@@ -78,3 +95,4 @@ def delete_product(inventory, dname):
         if product["Product"]== dname:
             inventory.remove(product)
             print(dname, "successfully deleted.")
+    
