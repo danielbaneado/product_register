@@ -13,15 +13,27 @@ while op!= 9:
     if op== 1:
         try:
             to_add= int(input("How many products do you want to add?\n >> "))
-            if to_add <= 0:
+            if to_add < 0:
                 raise ValueError
         except:
             print("Invalid quantity!")
             continue
         for i in range(to_add):
             name= input("Type product name\n >> ").lower()
-            price= float(input("Type product price\n >> "))
-            stock= int(input("Type product stock\n >> "))
+            try:
+                price= float(input("Type product price\n >> "))
+                if price <= 0:
+                    raise ValueError 
+            except:
+                print("Invalid price! Try again")
+                continue
+            try:
+                stock= int(input("Type product stock\n >> "))
+                if stock <= 0:
+                    raise ValueError 
+            except:
+                print("Invalid stock! Try again")
+                continue
             services.add_product(inventory, name, price, stock)
     elif op== 2:
         services.see_inventory(inventory) 
