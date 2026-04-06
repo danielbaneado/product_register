@@ -2,11 +2,23 @@ import services_s3 as services
 op= True
 inventory= []
 
-while op!= 7:
-    op= int(input("\nProduct register\n 1) Add product\n 2) Show inventory\n 3) Calculate stadistics\n 4) Search product\n 5) Update product\n 6) Delete product\n 7) Exit\n >> ")) 
+while op!= 9:
+    try:
+        op= int(input("\nProduct register\n 1) Add product\n 2) Show inventory\n 3) Calculate stadistics\n 4) Search product\n 5) Update product\n 6) Delete product\n 7) Overwrite/append to CSV\n 8) Charge CSV\n 9) Exit\n >> "))
+        if op not in range(1, 10):
+            raise ValueError
+    except:
+        print("Invalid option, please select a valid one.")
+        continue
     if op== 1:
-        product_to_add= int(input("How many products do you want to add?\n >> "))
-        for i in range(product_to_add):
+        try:
+            to_add= int(input("How many products do you want to add?\n >> "))
+            if to_add <= 0:
+                raise ValueError
+        except:
+            print("Invalid quantity!")
+            continue
+        for i in range(to_add):
             name= input("Type product name\n >> ").lower()
             price= float(input("Type product price\n >> "))
             stock= int(input("Type product stock\n >> "))
@@ -27,4 +39,9 @@ while op!= 7:
         dname= input("Type product name to delete\n >> ").lower()
         services.delete_product(inventory, dname)
     elif op== 7:
+        choose= input("Overwrite or append (o/a)\n >> ")
+        services.save_csv(inventory, choose)
+    elif op== 8:
+        inventory= services.charge_csv()
+    elif op== 9:
         print("Thanks for use our services!")
